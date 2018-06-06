@@ -16,16 +16,16 @@ public class ApressHttpClient {
     private Gson builder;
 
     @Inject
-    public ApressHttpClient(GsonBuilder builder){
+    public ApressHttpClient(GsonBuilder builder) {
         this.builder = builder.create();
     }
 
-    public String callPriceApi(String isbn){
+    public String callPriceData(String isbn) {
         try {
             HttpResponse<String> response = Unirest.post("https://www.apress.com//us/product-search/ajax/prices")
-                .header("Content-Type", "application/json")
-                .body(String.format("[{\"type\":\"book\",\"id\":\"%s\"}]", isbn.replaceAll("-", "")))
-                .asString();
+                    .header("Content-Type", "application/json")
+                    .body(String.format("[{\"type\":\"book\",\"id\":\"%s\"}]", isbn.replaceAll("-", "")))
+                    .asString();
 
             return response.getBody();
         } catch (UnirestException e) {
@@ -34,7 +34,7 @@ public class ApressHttpClient {
         }
     }
 
-    public String callApi(String isbn){
+    public String fetchPageHtml(String isbn) {
         try {
             HttpResponse<String> response = Unirest.get("https://www.apress.com/us/search")
                     .queryString("query", isbn)

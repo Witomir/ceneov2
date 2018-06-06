@@ -1,8 +1,8 @@
 package pl.witomir.ceneov2.args;
 
 public class Parser {
-    public String parseArgs(String[] args){
-        if(args.length < 1){
+    public String parseArgs(String[] args) {
+        if (args.length < 1) {
             renderHelp();
             throw new IllegalArgumentException();
         } else {
