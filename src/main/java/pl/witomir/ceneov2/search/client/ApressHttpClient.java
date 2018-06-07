@@ -3,30 +3,26 @@ package pl.witomir.ceneov2.search.client;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.inject.Inject;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 public class ApressHttpClient {
-    private Gson builder;
+    private Gson gson;
+    private RestClient restClient;
     private String baseUri = "https://www.apress.com";
     private String searchEndpoint = "/us/search";
     private String priceEndpoint = "/us/product-search/ajax/prices";
     private String requestTemplate = "[{\"type\":\"book\",\"id\":\"%s\"}]";
+    private String searchField = "query";
 
     @Inject
-    public ApressHttpClient(GsonBuilder builder) {
-        this.builder = builder.create();
+    public ApressHttpClient(GsonBuilder gsonBuilder, RestClient restClient) {
+        this.gson = gsonBuilder.create();
+        this.restClient = restClient;
     }
 
     public String fetchPriceData(String isbn) {
         try {
-            HttpResponse<String> response = Unirest.post(baseUri + priceEndpoint)
-                    .header("Content-Type", "application/json")
-                    .body(generateRequestBody(isbn))
-                    .asString();
-
-            return response.getBody();
+            return restClient.postJson(baseUri + priceEndpoint, generateRequestBody(isbn));
         } catch (UnirestException e) {
             e.printStackTrace();
             return "";
@@ -35,15 +31,11 @@ public class ApressHttpClient {
 
     public String fetchPageHtml(String isbn) {
         try {
-            HttpResponse<String> response = Unirest.get(baseUri + searchEndpoint)
-                    .queryString("query", isbn)
-                    .asString();
-            return response.getBody();
+            return restClient.search(baseUri + searchEndpoint, searchField, isbn);
         } catch (UnirestException e) {
             e.printStackTrace();
             return "";
         }
-
     }
 
     private String generateRequestBody(String isbn) {

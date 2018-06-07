@@ -1,7 +1,7 @@
 package pl.witomir.ceneov2.search.price;
 
 public class PriceExtractor {
-    public static String getPriceFromString(String price){
+    public static String getAmount(String price){
         return price.substring(1);
     }
 

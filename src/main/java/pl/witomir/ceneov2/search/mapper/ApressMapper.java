@@ -26,7 +26,7 @@ public class ApressMapper {
         String title = document.selectFirst(titleLinkSelector).text();
         String link = document.selectFirst(titleLinkSelector).attr("href");
         Currency currency = PriceExtractor.getCurrency(bookData[0].getPrice().getBestPriceFmt());
-        String price = PriceExtractor.getPriceFromString(bookData[0].getPrice().getBestPriceFmt());
+        String price = PriceExtractor.getAmount(bookData[0].getPrice().getBestPriceFmt());
 
         return new Book()
                 .setTitle(title)
