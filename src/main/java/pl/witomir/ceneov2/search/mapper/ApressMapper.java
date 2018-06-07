@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import pl.witomir.ceneov2.search.model.Book;
 import pl.witomir.ceneov2.currency.Currency;
 import pl.witomir.ceneov2.currency.PriceExtractor;
+import pl.witomir.ceneov2.search.model.apress.ApressBookModel;
 
 public class ApressMapper {
 
@@ -21,12 +22,12 @@ public class ApressMapper {
     }
 
     public Book mapToBook(String priceApiResponse, String fullPage) {
-        pl.witomir.ceneov2.search.model.apress.Book[] bookData = builder.fromJson(priceApiResponse, pl.witomir.ceneov2.search.model.apress.Book[].class);
+        ApressBookModel[] apressBookModelData = builder.fromJson(priceApiResponse, ApressBookModel[].class);
         Document document = Jsoup.parse(fullPage);
         String title = document.selectFirst(titleLinkSelector).text();
         String link = document.selectFirst(titleLinkSelector).attr("href");
-        Currency currency = PriceExtractor.getCurrency(bookData[0].getPrice().getBestPriceFmt());
-        String price = PriceExtractor.getAmount(bookData[0].getPrice().getBestPriceFmt());
+        Currency currency = PriceExtractor.getCurrency(apressBookModelData[0].getPrice().getBestPriceFmt());
+        Float price = PriceExtractor.getAmount(apressBookModelData[0].getPrice().getBestPriceFmt());
 
         return new Book()
                 .setTitle(title)

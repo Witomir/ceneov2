@@ -1,7 +1,6 @@
 package pl.witomir.ceneov2.currency;
 
 import com.google.inject.Inject;
-import pl.witomir.ceneov2.currency.api.ExchangeRateModelInterface;
 import pl.witomir.ceneov2.currency.api.ExchangeRateProviderInterface;
 import pl.witomir.ceneov2.search.model.Book;
 
@@ -16,10 +15,27 @@ public class PriceComparator {
         this.exchangeRateProvider = exchangeRateProvider;
     }
 
-    public Book chooseCheaperBook(List<Book> books) {
-        ExchangeRateModelInterface[] rates = exchangeRateProvider.getCurrentRates();
+    public Book chooseCheapestBook(List<Book> books) {
+        if(books.isEmpty()) {
+            return null;
+        }
 
+        Float minPrice = (float) 9999999;
+        Book cheapestBook = books.get(0);
+        for (Book book : books) {
+            Float priceInPln = getPriceInPln(book.getCurrency(), book.getPrice());
 
-        return books.get(0);
+            if(priceInPln < minPrice){
+                minPrice = priceInPln;
+                cheapestBook = book;
+            }
+        }
+
+        return cheapestBook;
+    }
+
+    public Float getPriceInPln(Currency currency, Float bookPrice) {
+        Float rate = exchangeRateProvider.getRateForCurrency(currency);
+        return rate * bookPrice;
     }
 }

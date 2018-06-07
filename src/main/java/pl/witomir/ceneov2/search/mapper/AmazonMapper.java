@@ -18,7 +18,7 @@ public class AmazonMapper {
         String link = document.selectFirst(tittleLinkSelector).attr("href");
         String priceText = document.selectFirst(priceTextSelector).text();
         Currency currency = PriceExtractor.getCurrency(priceText);
-        String price = PriceExtractor.getAmount(priceText);
+        Float price = PriceExtractor.getAmount(priceText);
 
         return new Book()
                 .setTitle(title)

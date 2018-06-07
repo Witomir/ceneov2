@@ -1,6 +1,6 @@
 package pl.witomir.ceneov2.search.model.apress;
 
-public class Price {
+public class ApressBookPrice {
     private String bestPrice;
     private String bestPriceFmt;
     private String listPrice;

@@ -1,8 +1,8 @@
 package pl.witomir.ceneov2.currency;
 
 public class PriceExtractor {
-    public static String getAmount(String price) {
-        return price.substring(1);
+    public static Float getAmount(String price) {
+        return Float.valueOf(price.substring(1));
     }
 
     public static Currency getCurrency(String price) {

@@ -43,6 +43,7 @@ public class EngineFactory implements Provider<Engine> {
         List<ProviderInterface> providers = new ArrayList<ProviderInterface>();
         providers.add(amazon);
         providers.add(apress);
+
         return new Engine(providers, isbnFinder, parser, priceComparator, renderer);
     }
 }

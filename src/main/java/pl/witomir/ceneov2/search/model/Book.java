@@ -4,7 +4,7 @@ import pl.witomir.ceneov2.currency.Currency;
 
 public class Book {
     private String title;
-    private String price;
+    private Float price;
     private String link;
     private Currency currency;
 
@@ -17,11 +17,11 @@ public class Book {
         return this;
     }
 
-    public String getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public Book setPrice(String price) {
+    public Book setPrice(Float price) {
         this.price = price;
         return this;
     }

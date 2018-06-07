@@ -6,6 +6,6 @@ import java.util.List;
 
 public class Renderer {
     public void renderResult(Book result) {
-        System.out.println(result.getPrice() + result.getCurrency() + " " + result.getLink());
+        System.out.println(result.getPrice().toString() + result.getCurrency() + " " + result.getLink());
     }
 }

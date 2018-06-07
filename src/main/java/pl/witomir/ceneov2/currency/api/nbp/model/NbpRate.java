@@ -5,7 +5,7 @@ import pl.witomir.ceneov2.currency.api.ExchangeRateModelInterface;
 public class NbpRate implements ExchangeRateModelInterface {
     private String code;
     private String currency;
-    private String mid;
+    private Float mid;
 
     public String getCode() {
         return code;
@@ -23,11 +23,11 @@ public class NbpRate implements ExchangeRateModelInterface {
         this.currency = currency;
     }
 
-    public String getMid() {
+    public Float getMid() {
         return mid;
     }
 
-    public void setMid(String mid) {
+    public void setMid(Float mid) {
         this.mid = mid;
     }
 }

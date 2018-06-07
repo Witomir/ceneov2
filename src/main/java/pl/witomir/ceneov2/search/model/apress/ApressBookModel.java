@@ -1,11 +1,9 @@
 package pl.witomir.ceneov2.search.model.apress;
 
-import java.util.List;
-
-public class Book {
+public class ApressBookModel {
     private String id;
     private String type;
-    private Price price;
+    private ApressBookPrice price;
 
     public String getId() {
         return id;
@@ -23,11 +21,11 @@ public class Book {
         this.type = type;
     }
 
-    public Price getPrice() {
+    public ApressBookPrice getPrice() {
         return price;
     }
 
-    public void setPrice(Price price) {
+    public void setPrice(ApressBookPrice price) {
         this.price = price;
     }
 }

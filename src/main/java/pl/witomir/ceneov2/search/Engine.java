@@ -38,7 +38,7 @@ public class Engine {
         String title = argsParser.parseArgs(args);
         String isbn = isbnFinder.findIsbnByTitle(title);
         List<Book> results = search(isbn);
-        renderer.renderResult(priceComparator.chooseCheaperBook(results));
+        renderer.renderResult(priceComparator.chooseCheapestBook(results));
     }
 
     private List<Book> search(String isbn) {
