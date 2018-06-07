@@ -1,9 +1,12 @@
 package pl.witomir.ceneov2.search.model;
 
+import pl.witomir.ceneov2.search.price.Currency;
+
 public class Book {
     private String title;
     private String price;
     private String link;
+    private Currency currency;
 
     public String getTitle() {
         return title;
@@ -29,6 +32,15 @@ public class Book {
 
     public Book setLink(String link) {
         this.link = link;
+        return this;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public Book setCurrency(Currency currency) {
+        this.currency = currency;
         return this;
     }
 }

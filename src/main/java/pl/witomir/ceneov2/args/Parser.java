@@ -11,6 +11,6 @@ public class Parser {
     }
 
     private static void renderHelp() {
-        System.out.println("Add book's ISBN as a fisrt argument");
+        System.out.println("Add book's title as a first argument");
     }
 }

@@ -3,6 +3,8 @@ package pl.witomir.ceneov2.search.mapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import pl.witomir.ceneov2.search.model.Book;
+import pl.witomir.ceneov2.search.price.Currency;
+import pl.witomir.ceneov2.search.price.PriceExtractor;
 
 public class AmazonMapper {
 
@@ -14,11 +16,14 @@ public class AmazonMapper {
 
         String title = document.selectFirst(tittleLinkSelector).text();
         String link = document.selectFirst(tittleLinkSelector).attr("href");
-        String price = document.selectFirst(priceTextSelector).text();
+        String priceText = document.selectFirst(priceTextSelector).text();
+        Currency currency = PriceExtractor.getCurrency(priceText);
+        String price = PriceExtractor.getPriceFromString(priceText);
 
         return new Book()
                 .setTitle(title)
                 .setPrice(price)
-                .setLink(link);
+                .setLink(link)
+                .setCurrency(currency);
     }
 }

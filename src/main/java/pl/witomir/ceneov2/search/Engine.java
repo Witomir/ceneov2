@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import pl.witomir.ceneov2.args.Parser;
 import pl.witomir.ceneov2.isbn.IsbnFinder;
 import pl.witomir.ceneov2.search.model.Book;
+import pl.witomir.ceneov2.search.price.PriceComparator;
 import pl.witomir.ceneov2.search.provider.ProviderInterface;
 import pl.witomir.ceneov2.view.Renderer;
 
@@ -15,6 +16,7 @@ public class Engine {
     private List<ProviderInterface> providers;
     private IsbnFinder isbnFinder;
     private Parser argsParser;
+    private PriceComparator priceComparator;
     private Renderer renderer;
 
     @Inject
@@ -22,12 +24,14 @@ public class Engine {
             List<ProviderInterface> bookProviders,
             IsbnFinder isbnFinder,
             Parser consoleArgumentsParser,
+            PriceComparator priceComparator,
             Renderer renderer
     )
     {
         this.providers = bookProviders;
         this.isbnFinder = isbnFinder;
         this.argsParser = consoleArgumentsParser;
+        this.priceComparator = priceComparator;
         this.renderer = renderer;
     }
 
@@ -35,7 +39,7 @@ public class Engine {
         String title = argsParser.parseArgs(args);
         String isbn = isbnFinder.findIsbnByTitle(title);
         List<Book> results = search(isbn);
-        renderer.renderResults(results);
+        renderer.renderResult(priceComparator.chooseCheaperBook(results));
     }
 
     private List<Book> search(String isbn) {

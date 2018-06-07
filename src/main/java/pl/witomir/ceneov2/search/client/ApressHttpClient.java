@@ -20,7 +20,7 @@ public class ApressHttpClient {
         this.builder = builder.create();
     }
 
-    public String callPriceData(String isbn) {
+    public String fetchPriceData(String isbn) {
         try {
             HttpResponse<String> response = Unirest.post("https://www.apress.com//us/product-search/ajax/prices")
                     .header("Content-Type", "application/json")

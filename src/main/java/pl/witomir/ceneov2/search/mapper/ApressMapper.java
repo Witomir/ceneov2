@@ -6,6 +6,8 @@ import com.google.inject.Inject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import pl.witomir.ceneov2.search.model.Book;
+import pl.witomir.ceneov2.search.price.Currency;
+import pl.witomir.ceneov2.search.price.PriceExtractor;
 
 public class ApressMapper {
 
@@ -23,10 +25,13 @@ public class ApressMapper {
         Document document = Jsoup.parse(fullPage);
         String title = document.selectFirst(titleLinkSelector).text();
         String link = document.selectFirst(titleLinkSelector).attr("href");
+        Currency currency = PriceExtractor.getCurrency(bookData[0].getPrice().getBestPriceFmt());
+        String price = PriceExtractor.getPriceFromString(bookData[0].getPrice().getBestPriceFmt());
 
         return new Book()
                 .setTitle(title)
                 .setLink(baseUri + link)
-                .setPrice(bookData[0].getPrice().getBestPriceFmt());
+                .setPrice(price)
+                .setCurrency(currency);
     }
 }

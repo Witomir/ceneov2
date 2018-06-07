@@ -16,9 +16,9 @@ public class Apress implements ProviderInterface {
     }
 
     public Book getData(String isbn) {
-        String pageHtm = client.fetchPageHtml(isbn);
-        String priceData = client.callPriceData(isbn);
+        String pageHtml = client.fetchPageHtml(isbn);
+        String priceData = client.fetchPriceData(isbn);
 
-        return apressMapper.mapToBook(priceData, pageHtm);
+        return apressMapper.mapToBook(priceData, pageHtml);
     }
 }

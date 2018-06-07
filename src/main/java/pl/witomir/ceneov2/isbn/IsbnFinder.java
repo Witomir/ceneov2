@@ -25,10 +25,10 @@ public class IsbnFinder {
         try {
             String bookDetailsHtml = Unirest.get(bookLink).asString().getBody();
 
-            Document document = Jsoup.parse(bookDetailsHtml);
-            for(Element ele: document.select("#detail_bullets_id li")){
-                if(ele.text().matches(".*ISBN-13:.*")){
-                    return ele.text().substring(9);
+            Document bookDetailsDocument = Jsoup.parse(bookDetailsHtml);
+            for(Element row: bookDetailsDocument.select("#detail_bullets_id li")){
+                if(row.text().matches(".*ISBN-13:.*")){
+                    return row.text().substring(9);
                 }
             }
         } catch (UnirestException e) {
