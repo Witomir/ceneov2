@@ -7,7 +7,7 @@ public class RestClient {
 
     private static final int CONNECTION_TIMEOUT = 2000;
 
-    public RestClient(){
+    public RestClient() {
         Unirest.setTimeouts(CONNECTION_TIMEOUT, CONNECTION_TIMEOUT);
     }
 

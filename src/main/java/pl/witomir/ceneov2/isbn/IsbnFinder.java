@@ -15,7 +15,7 @@ public class IsbnFinder {
     private RestClient restClient;
 
     @Inject
-    public IsbnFinder(AmazonHttpClient amazonHttpClient, AmazonMapper amazonMapper, RestClient restClient){
+    public IsbnFinder(AmazonHttpClient amazonHttpClient, AmazonMapper amazonMapper, RestClient restClient) {
         this.amazonHttpClient = amazonHttpClient;
         this.amazonMapper = amazonMapper;
         this.restClient = restClient;
@@ -37,8 +37,8 @@ public class IsbnFinder {
     }
 
     private String extractIsbn(Document bookDetailsDocument) {
-        for(Element row: bookDetailsDocument.select("#detail_bullets_id li")){
-            if(row.text().matches(".*ISBN-13:.*")){
+        for (Element row : bookDetailsDocument.select("#detail_bullets_id li")) {
+            if (row.text().matches(".*ISBN-13:.*")) {
                 return row.text().substring(9);
             }
         }

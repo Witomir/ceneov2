@@ -3,8 +3,8 @@ package pl.witomir.ceneov2.search.mapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import pl.witomir.ceneov2.search.model.Book;
-import pl.witomir.ceneov2.search.price.Currency;
-import pl.witomir.ceneov2.search.price.PriceExtractor;
+import pl.witomir.ceneov2.currency.Currency;
+import pl.witomir.ceneov2.currency.PriceExtractor;
 
 public class AmazonMapper {
 

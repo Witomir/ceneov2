@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import pl.witomir.ceneov2.args.Parser;
 import pl.witomir.ceneov2.isbn.IsbnFinder;
 import pl.witomir.ceneov2.search.model.Book;
-import pl.witomir.ceneov2.search.price.PriceComparator;
+import pl.witomir.ceneov2.currency.PriceComparator;
 import pl.witomir.ceneov2.search.provider.ProviderInterface;
 import pl.witomir.ceneov2.view.Renderer;
 
@@ -26,8 +26,7 @@ public class Engine {
             Parser consoleArgumentsParser,
             PriceComparator priceComparator,
             Renderer renderer
-    )
-    {
+    ) {
         this.providers = bookProviders;
         this.isbnFinder = isbnFinder;
         this.argsParser = consoleArgumentsParser;

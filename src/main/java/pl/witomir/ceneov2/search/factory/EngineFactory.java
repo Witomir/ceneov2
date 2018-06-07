@@ -5,7 +5,7 @@ import com.google.inject.Provider;
 import pl.witomir.ceneov2.args.Parser;
 import pl.witomir.ceneov2.isbn.IsbnFinder;
 import pl.witomir.ceneov2.search.Engine;
-import pl.witomir.ceneov2.search.price.PriceComparator;
+import pl.witomir.ceneov2.currency.PriceComparator;
 import pl.witomir.ceneov2.search.provider.Amazon;
 import pl.witomir.ceneov2.search.provider.Apress;
 import pl.witomir.ceneov2.search.provider.ProviderInterface;

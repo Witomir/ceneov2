@@ -1,4 +1,4 @@
-package pl.witomir.ceneov2.search.price;
+package pl.witomir.ceneov2.currency;
 
 public enum Currency {
     GBP,

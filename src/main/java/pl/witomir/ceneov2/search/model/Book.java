@@ -1,6 +1,6 @@
 package pl.witomir.ceneov2.search.model;
 
-import pl.witomir.ceneov2.search.price.Currency;
+import pl.witomir.ceneov2.currency.Currency;
 
 public class Book {
     private String title;
