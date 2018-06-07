@@ -5,16 +5,19 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 public class AmazonHttpClient {
+
+    private String baseUri = "https://www.amazon.co.uk/s/ref=nb_sb_noss?";
+
     public AmazonHttpClient() {
 
     }
 
     public String getHtml(String searchTerm) {
         try {
-            HttpResponse<String> jsonNodeHttpResponse = Unirest.get("https://www.amazon.co.uk/s/ref=nb_sb_noss?")
+            HttpResponse<String> responseBody = Unirest.get(baseUri)
                     .queryString("field-keywords", searchTerm)
                     .asString();
-            return jsonNodeHttpResponse.getBody();
+            return responseBody.getBody();
         } catch (UnirestException e) {
             e.printStackTrace();
             return "";

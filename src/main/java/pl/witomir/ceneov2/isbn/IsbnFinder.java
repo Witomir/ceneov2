@@ -35,6 +35,6 @@ public class IsbnFinder {
             e.printStackTrace();
         }
 
-        return "91231231232";
+        throw new RuntimeException("ISBN not found");
     }
 }

@@ -6,14 +6,13 @@ import com.google.inject.Inject;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import pl.witomir.ceneov2.search.model.apress.Book;
-
-import java.util.List;
 
 public class ApressHttpClient {
     private Gson builder;
+    private String baseUri = "https://www.apress.com";
+    private String searchEndpoint = "/us/search";
+    private String priceEndpoint = "/us/product-search/ajax/prices";
+    private String requestTemplate = "[{\"type\":\"book\",\"id\":\"%s\"}]";
 
     @Inject
     public ApressHttpClient(GsonBuilder builder) {
@@ -22,9 +21,9 @@ public class ApressHttpClient {
 
     public String fetchPriceData(String isbn) {
         try {
-            HttpResponse<String> response = Unirest.post("https://www.apress.com//us/product-search/ajax/prices")
+            HttpResponse<String> response = Unirest.post(baseUri + priceEndpoint)
                     .header("Content-Type", "application/json")
-                    .body(String.format("[{\"type\":\"book\",\"id\":\"%s\"}]", isbn.replaceAll("-", "")))
+                    .body(generateRequestBody(isbn))
                     .asString();
 
             return response.getBody();
@@ -36,7 +35,7 @@ public class ApressHttpClient {
 
     public String fetchPageHtml(String isbn) {
         try {
-            HttpResponse<String> response = Unirest.get("https://www.apress.com/us/search")
+            HttpResponse<String> response = Unirest.get(baseUri + searchEndpoint)
                     .queryString("query", isbn)
                     .asString();
             return response.getBody();
@@ -45,5 +44,9 @@ public class ApressHttpClient {
             return "";
         }
 
+    }
+
+    private String generateRequestBody(String isbn) {
+        return String.format(requestTemplate, isbn.replaceAll("-", ""));
     }
 }
