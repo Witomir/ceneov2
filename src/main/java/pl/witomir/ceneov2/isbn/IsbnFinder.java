@@ -1,12 +1,12 @@
 package pl.witomir.ceneov2.isbn;
 
 import com.google.inject.Inject;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import pl.witomir.ceneov2.search.client.AmazonHttpClient;
 import pl.witomir.ceneov2.search.client.RestClient;
+import pl.witomir.ceneov2.search.exception.BookNotFoundException;
 import pl.witomir.ceneov2.search.mapper.AmazonMapper;
 
 public class IsbnFinder {
@@ -21,7 +21,7 @@ public class IsbnFinder {
         this.restClient = restClient;
     }
 
-    public String findIsbnByTitle(String title) {
+    public String findIsbnByTitle(String title) throws BookNotFoundException {
         try {
             String pageHtml = amazonHttpClient.getHtml(title);
             String bookLink = amazonMapper.mapToBook(pageHtml).getLink();
@@ -30,7 +30,7 @@ public class IsbnFinder {
             String isbn = extractIsbn(bookDetailsDocument);
             if (isbn != null) return isbn;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new BookNotFoundException();
         }
 
         throw new RuntimeException("ISBN not found");

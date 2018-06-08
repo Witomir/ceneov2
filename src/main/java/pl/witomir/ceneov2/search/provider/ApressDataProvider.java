@@ -6,7 +6,7 @@ import pl.witomir.ceneov2.search.mapper.ApressMapper;
 import pl.witomir.ceneov2.search.model.Book;
 
 public class ApressDataProvider implements ProviderInterface {
-    private final ApressHttpClient apressHttpClient;
+    private ApressHttpClient apressHttpClient;
     private ApressMapper apressMapper;
 
     @Inject
@@ -16,9 +16,13 @@ public class ApressDataProvider implements ProviderInterface {
     }
 
     public Book getBookData(String isbn) {
-        String pageHtml = apressHttpClient.fetchPageHtml(isbn);
-        String priceData = apressHttpClient.fetchPriceData(isbn);
 
-        return apressMapper.mapToBook(priceData, pageHtml);
+        try {
+            String pageHtml = apressHttpClient.fetchPageHtml(isbn);
+            String priceData = apressHttpClient.fetchPriceData(isbn);
+            return apressMapper.mapToBook(priceData, pageHtml);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

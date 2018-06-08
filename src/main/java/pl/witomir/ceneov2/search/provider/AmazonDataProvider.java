@@ -16,7 +16,11 @@ public class AmazonDataProvider implements ProviderInterface {
     }
 
     public Book getBookData(String isbn) {
-        String pageHtml = amazonHttpClient.getHtml(isbn);
-        return bookMapper.mapToBook(pageHtml);
+        try {
+            String pageHtml = amazonHttpClient.getHtml(isbn);
+            return bookMapper.mapToBook(pageHtml);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

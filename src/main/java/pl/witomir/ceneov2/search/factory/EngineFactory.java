@@ -3,9 +3,9 @@ package pl.witomir.ceneov2.search.factory;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import pl.witomir.ceneov2.args.ArgsParser;
+import pl.witomir.ceneov2.currency.PriceComparator;
 import pl.witomir.ceneov2.isbn.IsbnFinder;
 import pl.witomir.ceneov2.search.SearchEngine;
-import pl.witomir.ceneov2.currency.PriceComparator;
 import pl.witomir.ceneov2.search.provider.AmazonDataProvider;
 import pl.witomir.ceneov2.search.provider.ApressDataProvider;
 import pl.witomir.ceneov2.search.provider.ProviderInterface;
@@ -40,7 +40,7 @@ public class EngineFactory implements Provider<SearchEngine> {
 
     @Override
     public SearchEngine get() {
-        List<ProviderInterface> providers = new ArrayList<ProviderInterface>();
+        List<ProviderInterface> providers = new ArrayList<>();
         providers.add(amazonDataProvider);
         providers.add(apressDataProvider);
 
