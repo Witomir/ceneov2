@@ -1,8 +1,8 @@
 package pl.witomir.ceneov2.currency;
 
 public class PriceExtractor {
-    public static Float getAmount(String price) {
-        return Float.valueOf(price.substring(1));
+    public static Double getAmount(String price) {
+        return Double.valueOf(price.substring(1));
     }
 
     public static Currency getCurrency(String price) {
@@ -14,7 +14,7 @@ public class PriceExtractor {
                 return Currency.GBP;
             }
             default: {
-                throw new IllegalArgumentException("Unknown currency");
+                throw new IllegalArgumentException("Unsupported currency");
             }
         }
     }

@@ -5,8 +5,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 public class AmazonHttpClient {
 
-    private String searchField = "field-keywords";
-    private String baseUri = "https://www.amazon.co.uk/s/ref=nb_sb_noss?";
+    private static final String searchField = "field-keywords";
+    private static final String baseUri = "https://www.amazon.co.uk/s/ref=nb_sb_noss?";
     private RestClient restClient;
 
     @Inject

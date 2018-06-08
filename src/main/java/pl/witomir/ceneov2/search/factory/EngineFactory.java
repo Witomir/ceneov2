@@ -2,48 +2,48 @@ package pl.witomir.ceneov2.search.factory;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import pl.witomir.ceneov2.args.Parser;
+import pl.witomir.ceneov2.args.ArgsParser;
 import pl.witomir.ceneov2.isbn.IsbnFinder;
-import pl.witomir.ceneov2.search.Engine;
+import pl.witomir.ceneov2.search.SearchEngine;
 import pl.witomir.ceneov2.currency.PriceComparator;
-import pl.witomir.ceneov2.search.provider.Amazon;
-import pl.witomir.ceneov2.search.provider.Apress;
+import pl.witomir.ceneov2.search.provider.AmazonDataProvider;
+import pl.witomir.ceneov2.search.provider.ApressDataProvider;
 import pl.witomir.ceneov2.search.provider.ProviderInterface;
 import pl.witomir.ceneov2.view.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EngineFactory implements Provider<Engine> {
+public class EngineFactory implements Provider<SearchEngine> {
 
-    private final Amazon amazon;
-    private final Apress apress;
-    private Parser parser;
+    private final AmazonDataProvider amazonDataProvider;
+    private final ApressDataProvider apressDataProvider;
+    private ArgsParser argsParser;
     private Renderer renderer;
     private IsbnFinder isbnFinder;
     private PriceComparator priceComparator;
 
     @Inject
-    public EngineFactory(Amazon amazon,
-                         Apress apress,
-                         Parser parser,
+    public EngineFactory(AmazonDataProvider amazonDataProvider,
+                         ApressDataProvider apressDataProvider,
+                         ArgsParser argsParser,
                          Renderer renderer,
                          IsbnFinder isbnFinder,
                          PriceComparator priceComparator) {
-        this.amazon = amazon;
-        this.apress = apress;
-        this.parser = parser;
+        this.amazonDataProvider = amazonDataProvider;
+        this.apressDataProvider = apressDataProvider;
+        this.argsParser = argsParser;
         this.renderer = renderer;
         this.isbnFinder = isbnFinder;
         this.priceComparator = priceComparator;
     }
 
     @Override
-    public Engine get() {
+    public SearchEngine get() {
         List<ProviderInterface> providers = new ArrayList<ProviderInterface>();
-        providers.add(amazon);
-        providers.add(apress);
+        providers.add(amazonDataProvider);
+        providers.add(apressDataProvider);
 
-        return new Engine(providers, isbnFinder, parser, priceComparator, renderer);
+        return new SearchEngine(providers, isbnFinder, argsParser, priceComparator, renderer);
     }
 }

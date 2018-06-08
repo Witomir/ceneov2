@@ -22,14 +22,14 @@ public class IsbnFinder {
     }
 
     public String findIsbnByTitle(String title) {
-        String pageHtml = amazonHttpClient.getHtml(title);
-        String bookLink = amazonMapper.mapToBook(pageHtml).getLink();
         try {
+            String pageHtml = amazonHttpClient.getHtml(title);
+            String bookLink = amazonMapper.mapToBook(pageHtml).getLink();
             String bookDetailsHtml = restClient.get(bookLink);
             Document bookDetailsDocument = Jsoup.parse(bookDetailsHtml);
             String isbn = extractIsbn(bookDetailsDocument);
             if (isbn != null) return isbn;
-        } catch (UnirestException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

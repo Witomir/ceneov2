@@ -4,5 +4,5 @@ import pl.witomir.ceneov2.currency.Currency;
 
 public interface ExchangeRateProviderInterface {
     public ExchangeRateModelInterface[] getCurrentRates();
-    public Float getRateForCurrency(Currency currency);
+    public Double getRateForCurrency(Currency currency);
 }

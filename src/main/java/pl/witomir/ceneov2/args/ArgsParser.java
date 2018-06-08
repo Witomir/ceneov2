@@ -1,6 +1,6 @@
 package pl.witomir.ceneov2.args;
 
-public class Parser {
+public class ArgsParser {
     public String parseArgs(String[] args) {
         if (args.length < 1) {
             renderHelp();

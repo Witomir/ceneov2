@@ -8,8 +8,8 @@ import pl.witomir.ceneov2.currency.PriceExtractor;
 
 public class AmazonMapper {
 
-    private String tittleLinkSelector = "#result_0 a.s-color-twister-title-link";
-    private String priceTextSelector = "#result_0 span.s-price";
+    private static final String tittleLinkSelector = "#result_0 a.s-color-twister-title-link";
+    private static final String priceTextSelector = "#result_0 span.s-price";
 
     public Book mapToBook(String pageHtml) {
         Document document = Jsoup.parse(pageHtml);
@@ -18,7 +18,7 @@ public class AmazonMapper {
         String link = document.selectFirst(tittleLinkSelector).attr("href");
         String priceText = document.selectFirst(priceTextSelector).text();
         Currency currency = PriceExtractor.getCurrency(priceText);
-        Float price = PriceExtractor.getAmount(priceText);
+        Double price = PriceExtractor.getAmount(priceText);
 
         return new Book()
                 .setTitle(title)

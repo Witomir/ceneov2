@@ -8,11 +8,11 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 public class ApressHttpClient {
     private Gson gson;
     private RestClient restClient;
-    private String baseUri = "https://www.apress.com";
-    private String searchEndpoint = "/us/search";
-    private String priceEndpoint = "/us/product-search/ajax/prices";
-    private String requestTemplate = "[{\"type\":\"book\",\"id\":\"%s\"}]";
-    private String searchField = "query";
+    public static final String baseUri = "https://www.apress.com";
+    private static final String searchEndpoint = "/us/search";
+    private static final String priceEndpoint = "/us/product-search/ajax/prices";
+    private static final String requestTemplate = "[{\"type\":\"book\",\"id\":\"%s\"}]";
+    private static final String searchField = "query";
 
     @Inject
     public ApressHttpClient(GsonBuilder gsonBuilder, RestClient restClient) {

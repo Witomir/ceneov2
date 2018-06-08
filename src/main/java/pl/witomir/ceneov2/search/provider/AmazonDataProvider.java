@@ -5,18 +5,18 @@ import pl.witomir.ceneov2.search.client.AmazonHttpClient;
 import pl.witomir.ceneov2.search.mapper.AmazonMapper;
 import pl.witomir.ceneov2.search.model.Book;
 
-public class Amazon implements ProviderInterface {
-    private AmazonHttpClient client;
+public class AmazonDataProvider implements ProviderInterface {
+    private AmazonHttpClient amazonHttpClient;
     private AmazonMapper bookMapper;
 
     @Inject
-    public Amazon(AmazonHttpClient client, AmazonMapper bookMapper) {
-        this.client = client;
+    public AmazonDataProvider(AmazonHttpClient amazonHttpClient, AmazonMapper bookMapper) {
+        this.amazonHttpClient = amazonHttpClient;
         this.bookMapper = bookMapper;
     }
 
-    public Book getData(String isbn) {
-        String pageHtml = client.getHtml(isbn);
+    public Book getBookData(String isbn) {
+        String pageHtml = amazonHttpClient.getHtml(isbn);
         return bookMapper.mapToBook(pageHtml);
     }
 }

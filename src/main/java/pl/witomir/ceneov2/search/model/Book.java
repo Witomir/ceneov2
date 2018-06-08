@@ -4,7 +4,7 @@ import pl.witomir.ceneov2.currency.Currency;
 
 public class Book {
     private String title;
-    private Float price;
+    private Double price;
     private String link;
     private Currency currency;
 
@@ -17,11 +17,11 @@ public class Book {
         return this;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public Book setPrice(Float price) {
+    public Book setPrice(Double price) {
         this.price = price;
         return this;
     }
@@ -42,5 +42,21 @@ public class Book {
     public Book setCurrency(Currency currency) {
         this.currency = currency;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Book that = (Book) obj;
+
+        return (that.getCurrency() == this.getCurrency()
+                && that.getPrice().equals(this.getPrice())
+                && that.getLink().equals(this.getLink())
+                && that.getTitle().equals(this.getTitle()));
     }
 }

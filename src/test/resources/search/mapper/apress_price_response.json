@@ -1,0 +1,11 @@
+[{
+  "type": "book",
+  "id": "9781484227923",
+  "price": {
+    "bestPrice": 29.99,
+    "bestPriceFmt": "$29.99",
+    "listPrice": 29.99,
+    "listPriceFmt": "$29.99"
+  },
+  "showFrom": true
+}]

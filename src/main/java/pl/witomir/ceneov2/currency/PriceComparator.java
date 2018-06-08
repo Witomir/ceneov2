@@ -17,13 +17,13 @@ public class PriceComparator {
 
     public Book chooseCheapestBook(List<Book> books) {
         if(books.isEmpty()) {
-            return null;
+            throw new IllegalArgumentException("Nothing to compare");
         }
 
-        Float minPrice = (float) 9999999;
+        Double minPrice = 9999999.00;
         Book cheapestBook = books.get(0);
         for (Book book : books) {
-            Float priceInPln = getPriceInPln(book.getCurrency(), book.getPrice());
+            Double priceInPln = getPriceInPln(book.getCurrency(), book.getPrice());
 
             if(priceInPln < minPrice){
                 minPrice = priceInPln;
@@ -34,8 +34,8 @@ public class PriceComparator {
         return cheapestBook;
     }
 
-    public Float getPriceInPln(Currency currency, Float bookPrice) {
-        Float rate = exchangeRateProvider.getRateForCurrency(currency);
+    private Double getPriceInPln(Currency currency, Double bookPrice) {
+        Double rate = exchangeRateProvider.getRateForCurrency(currency);
         return rate * bookPrice;
     }
 }
