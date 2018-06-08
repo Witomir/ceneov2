@@ -2,13 +2,14 @@ package search.mapper;
 
 import junit.framework.TestCase;
 import pl.witomir.ceneov2.currency.Currency;
+import pl.witomir.ceneov2.search.exception.BookNotFoundException;
 import pl.witomir.ceneov2.search.mapper.AmazonMapper;
 import pl.witomir.ceneov2.search.model.Book;
 
 import java.io.IOException;
 
 public class AmazonMapperTest extends TestCase {
-    public void testBookMapping() throws IOException {
+    public void testBookMapping() throws IOException, BookNotFoundException {
         AmazonMapper mapper = new AmazonMapper();
         String response = new ResourceReader().getResourceFileAsString("amazon_search_response.html");
         Book book = mapper.mapToBook(response);
